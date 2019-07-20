@@ -31,7 +31,7 @@ export function rootReducer ( state:IAppState = INITIAL_STATE , action ) {
                 ]
             }) 
        case REMOVE_TODO :
-           Object.assign({} , state , {
+           return  Object.assign({} , state , {
                todos: state.todos.filter(t => t.id !== action.id),
                lastUpdate: new Date()
            })
