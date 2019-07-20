@@ -24,7 +24,8 @@ export class TodoListComponent implements OnInit {
     isCompleted: false
   }
   constructor(private ngRedux:NgRedux<IAppState>) { }
-
+  
+  warningText:string ='';
   ngOnInit() {
   };
 
@@ -36,13 +37,22 @@ export class TodoListComponent implements OnInit {
 
   toggleTodo(todo) { 
     this.ngRedux.dispatch({type: TOGGLE_TODO , id: todo.id});
+    this.warningText ='';
         
   };
 
   removeTodo(todo) { 
-    this.ngRedux.dispatch({type: REMOVE_TODO, id: todo.id });
-    
+    if( todo.isCompleted) {
+       this.ngRedux.dispatch({type: REMOVE_TODO, id: todo.id });
+    } else { 
+      this.warningText = 'Please complete the Task first'
+    }
+   
   };
+
+  warningMessage() {
+      return 'Please complete the task before deleting or contact your Admin' 
+  }
 
  
 
