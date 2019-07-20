@@ -1,5 +1,5 @@
 <h6>Create Todo:</h6>
-<form  (ngSubmit)="onSubmit()" #todoForm="ngForm">
+<form class='form'  (ngSubmit)="onSubmit()" #todoForm="ngForm">
     <div class="form-row">
         <div class="col-auto">
             <input 
@@ -47,6 +47,7 @@
             <th>Todo Description</th>
             <th>Responsible</th>
             <th>Priority</th>
+            <th>State</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -60,10 +61,14 @@
                 <span *ngIf="todo.priority === 'medium'" class="badge badge-warning">Medium</span> 
                 <span *ngIf="todo.priority === 'high'" class="badge badge-danger">High</span> 
             </td>
+            <td>    
+                <span *ngIf="todo.isCompleted"> Completed </span>
+                <span *ngIf="!todo.isCompleted"> Pending </span>
+            </td>
             <td> 
                 <button (click)="removeTodo(todo)" class="btn btn-danger">Delete</button>&nbsp;
                 <button (click)="toggleTodo(todo)" class="btn btn-success" *ngIf="!todo.isCompleted"> Complete </button>&nbsp;
-                <span [class.hidden]="!todo.isCompleted">Completed!</span>
+                <button (click)="toggleTodo(todo)"[class.hidden]="!todo.isCompleted" class="btn btn-primary" *ngIf="todo.isCompleted"> Edit </button>&nbsp;
             </td>
         </tr>
     </tbody>
